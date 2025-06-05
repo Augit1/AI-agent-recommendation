@@ -1,26 +1,40 @@
-# Aave Deposit App
+# AI Agent Recommendation System
 
-A React application for depositing and withdrawing tokens on Aave Protocol (Gnosis Chain).
+A modern web application that provides AI-powered agent recommendations based on user requirements and preferences.
 
 ## Features
 
-- Connect wallet using RainbowKit
-- Deposit tokens to Aave Protocol
-- Withdraw tokens from Aave Protocol
-- Modern, Apple-like UI design
+- Interactive UI for specifying agent requirements
+- AI-powered recommendation engine
+- Real-time response generation
+- Modern, responsive design with TailwindCSS
+- Server-side processing for complex AI operations
+
+## Tech Stack
+
+- **Frontend:**
+  - React with TypeScript
+  - Vite for build tooling
+  - TailwindCSS for styling
+  - React Query for data fetching
+  - React Markdown for content rendering
+
+- **Backend:**
+  - Node.js with Express
+  - CORS enabled for cross-origin requests
+  - Environment variable support with dotenv
 
 ## Prerequisites
 
 - Node.js 18 or later
 - npm or yarn
-- A WalletConnect project ID (get one at https://cloud.walletconnect.com)
 
 ## Getting Started
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/aave-gnosis-deposit-app.git
-cd aave-gnosis-deposit-app
+git clone https://github.com/yourusername/ai-agent-recommendation.git
+cd ai-agent-recommendation
 ```
 
 2. Install dependencies:
@@ -28,38 +42,52 @@ cd aave-gnosis-deposit-app
 npm install
 ```
 
-3. Create a `.env` file in the root directory with the following variables:
+3. Create a `.env` file in the root directory with any required environment variables:
 ```env
-VITE_APP_NAME=Aave Deposit App
-VITE_WALLET_CONNECT_PROJECT_ID=your_wallet_connect_project_id
+# Add your environment variables here
 ```
 
-4. Start the development server:
+4. Start the development servers:
 ```bash
-npm run dev
+# Start both frontend and backend servers
+npm run dev:all
+
+# Or start them separately:
+npm run dev     # Frontend only
+npm run server  # Backend only
 ```
 
 5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Building for Production
+## Development
 
-```bash
-npm run build
+- `npm run dev` - Start the frontend development server
+- `npm run server` - Start the backend server
+- `npm run dev:all` - Start both frontend and backend servers concurrently
+- `npm run build` - Build the frontend for production
+- `npm run lint` - Run ESLint for code quality checks
+- `npm run preview` - Preview the production build locally
+
+## Project Structure
+
+```
+├── src/              # Frontend source code
+├── public/           # Static assets
+├── DuneQueries/      # Query-related files
+├── server.js         # Backend server
+├── vite.config.ts    # Vite configuration
+├── tailwind.config.js # TailwindCSS configuration
+└── tsconfig.json     # TypeScript configuration
 ```
 
-The build artifacts will be stored in the `dist/` directory.
+## Contributing
 
-## Technologies Used
-
-- React
-- TypeScript
-- Vite
-- wagmi v2
-- RainbowKit
-- TailwindCSS
-- Aave Protocol
-- Gnosis Chain
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-ISC
+This project is licensed under the ISC License.
