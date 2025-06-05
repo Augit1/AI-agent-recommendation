@@ -17,14 +17,6 @@ interface Token {
   aTokenAddress: `0x${string}`;
 }
 
-interface Transaction {
-  hash: Hash;
-  type: 'deposit' | 'withdraw';
-  amount: string;
-  status: 'pending' | 'success' | 'error';
-  timestamp: number;
-}
-
 // Animated count-up hook
 function useCountUp(target: number, duration = 1000) {
   const [value, setValue] = useState(0);
@@ -51,8 +43,6 @@ interface AppProps {
 }
 
 function App({ theme, setTheme }: AppProps) {
-  const [amount, setAmount] = useState('');
-  const [action] = useState<'deposit' | 'withdraw'>('deposit');
   const [txHash, setTxHash] = useState<Hash | null>(null);
   const [txStatus, setTxStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
   const { address } = useAccount();
@@ -134,7 +124,6 @@ function App({ theme, setTheme }: AppProps) {
     if (isSuccess) {
       refetchATokenBalance();
       setTxStatus('success');
-      setAmount('');
       setTxHash(null);
     }
   }, [isSuccess, refetchATokenBalance]);
@@ -178,7 +167,6 @@ function App({ theme, setTheme }: AppProps) {
       setTxStatus('pending');
     } else if (isSuccess) {
       setTxStatus('success');
-      setAmount('');
       setTxHash(null);
     } else if (isError) {
       setTxStatus('error');
@@ -213,10 +201,6 @@ function App({ theme, setTheme }: AppProps) {
       console.error('Error formatting balance:', error);
       return '0.00';
     }
-  };
-
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleString();
   };
 
   // Calculate animated wallet balance

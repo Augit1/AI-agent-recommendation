@@ -1,18 +1,20 @@
-import { NextResponse } from 'next/server';
+import express from 'express';
+import cors from 'cors';
+
+const router = express.Router();
+router.use(cors());
+router.use(express.json());
 
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
-export async function POST(req: Request) {
+router.post('/', async (req, res) => {
   try {
-    const { messages } = await req.json();
+    const { messages } = req.body;
 
     if (!DEEPSEEK_API_KEY) {
       console.error('DeepSeek API key is not configured');
-      return NextResponse.json(
-        { error: 'API configuration error' },
-        { status: 500 }
-      );
+      return res.status(500).json({ error: 'API configuration error' });
     }
 
     const response = await fetch(DEEPSEEK_API_URL, {
@@ -35,19 +37,15 @@ export async function POST(req: Request) {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error('DeepSeek API Error:', errorData);
-      return NextResponse.json(
-        { error: 'Failed to get response from DeepSeek API' },
-        { status: response.status }
-      );
+      return res.status(response.status).json({ error: 'Failed to get response from DeepSeek API' });
     }
 
     const data = await response.json();
-    return NextResponse.json({ message: data.choices[0].message.content });
+    return res.json({ message: data.choices[0].message.content });
   } catch (error) {
     console.error('Chat API Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process chat request' },
-      { status: 500 }
-    );
+    return res.status(500).json({ error: 'Failed to process chat request' });
   }
-} 
+});
+
+export default router; 
