@@ -130,7 +130,12 @@ Remember: You are a helpful, precise, and secure DeFi adviser for Gnosis Chain o
       // Always prepend the system message for context
       const systemMessage: Message = { role: 'system', content: getSystemPrompt() };
       const chatMessages = [systemMessage, ...messages, userMessage];
-      const response = await fetch('/api/chat', {
+
+      // Use environment variable for backend URL
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+      const apiUrl = `${backendUrl}/api/chat`;
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
