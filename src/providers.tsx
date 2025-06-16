@@ -2,7 +2,7 @@ import { RainbowKitProvider, getDefaultConfig, darkTheme, lightTheme, Theme } fr
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { gnosis } from 'viem/chains';
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 import '@rainbow-me/rainbowkit/styles.css';
 
 // Log environment variables for verification
